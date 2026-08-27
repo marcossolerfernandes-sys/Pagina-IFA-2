@@ -191,7 +191,18 @@ nav a{
   border-radius:10px;
   white-space:nowrap;
   color:var(--azul2);
-  transition:background .2s ease,color .2s ease,transform .2s ease;
+  border:2px solid transparent;
+  outline:none;
+  transition:background .3s ease,color .3s ease,transform .3s ease,border-color .3s ease,box-shadow .3s ease;
+}
+
+nav a:focus{
+  outline:none;
+}
+
+nav a:focus-visible{
+  border-color:var(--verde);
+  box-shadow:0 0 0 3px rgba(25,135,84,.14);
 }
 
 nav a:hover{
@@ -202,7 +213,8 @@ nav a:hover{
 nav a.active{
   background:var(--azul);
   color:white;
-  box-shadow:0 4px 12px rgba(8,126,164,.25);
+  border-color:var(--verde);
+  box-shadow:0 5px 16px rgba(8,126,164,.28);
 }
 
 main{
@@ -831,8 +843,9 @@ footer{
   <h2>Matemática: transformar água em dados</h2>
   <p class="lead">
     A Matemática ajuda a medir consumo, comparar períodos, calcular economia e visualizar tendências.
-    Os gráficos abaixo usam <strong>dados didáticos ilustrativos</strong>, criados para demonstrar
-    como uma análise matemática pode ser feita — eles não representam medições da Sanepar.
+    Os dois primeiros gráficos usam <strong>dados didáticos ilustrativos</strong>. O terceiro gráfico
+    usa <strong>dados oficiais da ANA referentes a 2022</strong>, permitindo aplicar porcentagens e
+    interpretação de dados reais ao projeto.
   </p>
 
   <div class="grid">
@@ -846,6 +859,15 @@ footer{
       <h3>2. Economia após medidas sustentáveis</h3>
       <canvas id="chart2" width="700" height="380" aria-label="Gráfico de economia de água"></canvas>
       <p class="chart-note">Exemplo didático: comparação antes/depois de ações de economia.</p>
+    </article>
+
+    <article class="card">
+      <h3>3. Retirada de água no Brasil por setor — 2022</h3>
+      <canvas id="chart3" width="700" height="380" aria-label="Gráfico de retirada de água no Brasil por setor em 2022"></canvas>
+      <p class="chart-note">
+        Dados oficiais da ANA: irrigação 50,5%, abastecimento urbano 23,9%,
+        indústria 9,4%, uso animal 8%, termelétricas 5%, abastecimento rural 1,6% e mineração 1,6%.
+      </p>
     </article>
   </div>
 
@@ -898,19 +920,43 @@ footer{
 
   <div class="gallery">
     <figure>
-      <img src="visita-sanepar-01.jpg" alt="Área de estruturas de tratamento observada durante a visita à Sanepar em Maringá">
-      <figcaption><strong>Foto 1 — Área da estação:</strong> estruturas, passarelas e equipamentos observados durante a visita.</figcaption>
+      <img
+        src="https://www.sanepar.com.br/sites/default/files/styles/news_internal_desktop/public/import/files/foto_2_-_captacao_rio_pirapo_-_estacao_elevatoria.jpg.webp?itok=HvUNdqaJ"
+        alt="Estrutura de captação de água da Sanepar no Rio Pirapó, em Maringá"
+        loading="lazy">
+      <figcaption>
+        <strong>Captação no Rio Pirapó — Maringá:</strong> imagem oficial da Sanepar mostrando a estrutura de captação.
+        <br><span class="small">Fonte: Sanepar.</span>
+      </figcaption>
     </figure>
 
     <figure>
-      <img src="visita-sanepar-02.jpg" alt="Modelo expositivo com filtro, microscópio e equipamentos observado durante a visita">
-      <figcaption><strong>Foto 2 — Material de demonstração:</strong> modelo identificado como “FILTRO”, microscópio e outros equipamentos.</figcaption>
+      <img
+        src="https://www.sanepar.com.br/sites/default/files/styles/news_internal_desktop/public/import/files/foto_3_-_captacao_rio_pirapo_-_visita_vereadores.jpg.webp?itok=FUw4MFfq"
+        alt="Visita à estrutura de captação da Sanepar em Maringá"
+        loading="lazy">
+      <figcaption>
+        <strong>Visita técnica — Maringá:</strong> registro publicado pela Sanepar em matéria sobre a estrutura de captação.
+        <br><span class="small">Fonte: Sanepar.</span>
+      </figcaption>
     </figure>
 
     <figure>
-      <img src="visita-sanepar-03.jpg" alt="Detalhe do microscópio e equipamento de laboratório observado durante a visita">
-      <figcaption><strong>Foto 3 — Observação científica:</strong> microscópio e equipamento de laboratório apresentados no espaço visitado.</figcaption>
+      <img
+        src="https://www.sanepar.com.br/sites/default/files/styles/edital_featured_card/public/edital/images/edital_003_DIN_0.png.webp?itok=T5nqlPAU"
+        alt="Estrutura de estação de tratamento de esgoto da Sanepar"
+        loading="lazy">
+      <figcaption>
+        <strong>Tratamento de esgoto:</strong> imagem institucional da Sanepar relacionada à ETE.
+        <br><span class="small">Fonte: Sanepar.</span>
+      </figcaption>
     </figure>
+  </div>
+
+  <div class="warn">
+    <strong>Importante:</strong> como não temos fotografias próprias da visita, estas imagens são
+    <strong>ilustrativas e oficiais da Sanepar</strong>. Elas não devem ser apresentadas como se fossem
+    fotos tiradas pelo grupo durante a visita.
   </div>
 
   <div class="callout">
@@ -1051,8 +1097,8 @@ footer{
     </ol>
 
     <p class="small">
-      Observação: os gráficos da seção de Matemática são exemplos didáticos e não representam
-      medições oficiais da Sanepar.
+      Observação: os dois primeiros gráficos da seção de Matemática são exemplos didáticos.
+      O terceiro utiliza dados oficiais da ANA referentes a 2022 e não representa medições da Sanepar.
     </p>
   </div>
 </section>
@@ -1069,6 +1115,33 @@ footer{
 
 <script>
 /* Navegação suave com ajuste para o menu fixo */
+function smoothScrollTo(target){
+  const nav = document.querySelector('nav');
+  const offset = (nav ? nav.offsetHeight : 0) + 12;
+  const start = window.scrollY;
+  const destination = target.getBoundingClientRect().top + window.scrollY - offset;
+  const distance = destination - start;
+  const duration = Math.min(950, Math.max(500, Math.abs(distance) * 0.65));
+  const startTime = performance.now();
+
+  function easeInOutCubic(t){
+    return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
+  }
+
+  function step(now){
+    const progress = Math.min(1, (now - startTime) / duration);
+    const eased = easeInOutCubic(progress);
+
+    window.scrollTo(0, start + distance * eased);
+
+    if(progress < 1){
+      requestAnimationFrame(step);
+    }
+  }
+
+  requestAnimationFrame(step);
+}
+
 document.querySelectorAll('a[href^="#"]').forEach(link => {
   link.addEventListener('click', function(event){
     const id = this.getAttribute('href');
@@ -1077,15 +1150,12 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     if(!target) return;
 
     event.preventDefault();
+    this.blur();
 
-    const nav = document.querySelector('nav');
-    const offset = (nav ? nav.offsetHeight : 0) + 12;
-    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+    navLinks.forEach(item => item.classList.remove('active'));
+    this.classList.add('active');
 
-    window.scrollTo({
-      top,
-      behavior:'smooth'
-    });
+    smoothScrollTo(target);
   });
 });
 
@@ -1207,6 +1277,13 @@ function drawCharts(){
     ['Antes','Depois'],
     [14,10.8],
     'Consumo antes x depois (m³)'
+  );
+
+  drawBarChart(
+    'chart3',
+    ['Irrigação','Urbano','Indústria','Animal','Termelétrica','Rural','Mineração'],
+    [50.5,23.9,9.4,8,5,1.6,1.6],
+    'Retirada de água por setor (%) — ANA 2022'
   );
 }
 
