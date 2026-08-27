@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Água em Equilíbrio: trabalho interdisciplinar de Química, Biologia, Matemática e Pensamento Computacional sobre uso sustentável da água, ETA, ETE e reúso.">
+<title>Água em Equilíbrio | Química • Biologia • Matemática • Pensamento Computacional</title>
+
+<style>
+:root{
+  --azul:#087ea4;
+  --azul2:#075985;
+  --azul3:#063b4d;
+  --claro:#eaf8fc;
+  --verde:#198754;
+  --verde2:#dff5e7;
+  --verde3:#0f6b43;
+  --amarelo:#f5b942;
+  --escuro:#102a43;
+  --cinza:#52606d;
+  --branco:#fff;
+  --fundo:#f5fbfd;
+  --sombra:0 12px 32px rgba(16,42,67,.10);
+  --raio:20px;
+  --nav-height:64px;
+}
+
+*{box-sizing:border-box}
+
+html{
+  scroll-behavior:smooth;
+  scroll-padding-top:calc(var(--nav-height) + 18px);
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--escuro);
+  background:var(--fundo);
+  line-height:1.65;
+}
+
+body::selection{
+  background:var(--verde);
+  color:#fff;
+}
+
+a{color:var(--azul2)}
+
+header{
+  min-height:92vh;
+  display:flex;
+  align-items:center;
+  background:
+    radial-gradient(circle at 85% 15%,rgba(255,255,255,.13) 0 110px,transparent 111px),
+    radial-gradient(circle at 95% 75%,rgba(25,135,84,.25) 0 170px,transparent 171px),
+    linear-gradient(135deg,#043b4e 0%,#087ea4 52%,#1598b8 100%);
+  color:white;
+  padding:70px 7%;
+  position:relative;
+  overflow:hidden;
+}
+
+header:before{
+  content:"";
+  position:absolute;
+  width:620px;
+  height:620px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.13);
+  right:-230px;
+  top:-220px;
+}
+
+header:after{
+  content:"";
+  position:absolute;
+  width:280px;
+  height:280px;
+  border-radius:50%;
+  background:rgba(25,135,84,.20);
+  left:-130px;
+  bottom:-150px;
+}
+
+.hero{
+  max-width:1080px;
+  position:relative;
+  z-index:2;
+  animation:heroIn .8s ease both;
+}
+
+@keyframes heroIn{
+  from{opacity:0;transform:translateY(22px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.badge{
+  display:inline-block;
+  background:rgba(255,255,255,.14);
+  padding:8px 15px;
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:999px;
+  font-weight:bold;
+  backdrop-filter:blur(6px);
+}
+
+.discipline-bar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin:20px 0 6px;
+}
+
+.discipline{
+  padding:7px 12px;
+  border-radius:999px;
+  font-size:.9rem;
+  font-weight:bold;
+  border:1px solid rgba(255,255,255,.35);
+  background:rgba(25,135,84,.24);
+}
+
+h1{
+  font-size:clamp(2.7rem,7vw,5.8rem);
+  line-height:1;
+  margin:22px 0 18px;
+  letter-spacing:-2px;
+}
+
+.hero p{
+  font-size:1.12rem;
+  max-width:850px;
+}
+
+.hero .project-description{
+  border-left:4px solid #5ee69a;
+  padding-left:16px;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  margin:8px 8px 0 0;
+  background:white;
+  color:var(--azul2);
+  font-weight:bold;
+  cursor:pointer;
+  transition:transform .22s ease,box-shadow .22s ease,background .22s ease,color .22s ease;
+}
+
+.btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 20px rgba(0,0,0,.16);
+}
+
+.btn.alt{
+  background:transparent;
+  color:white;
+  border:1px solid rgba(255,255,255,.65);
+}
+
+.btn.alt:hover{
+  background:rgba(255,255,255,.12);
+}
+
+nav{
+  position:sticky;
+  top:0;
+  z-index:50;
+  min-height:var(--nav-height);
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(12px);
+  box-shadow:0 2px 14px rgba(0,0,0,.08);
+  display:flex;
+  align-items:center;
+  gap:8px;
+  overflow:auto;
+  padding:10px 4%;
+}
+
+nav a{
+  text-decoration:none;
+  font-weight:bold;
+  padding:9px 12px;
+  border-radius:10px;
+  white-space:nowrap;
+  color:var(--azul2);
+  transition:background .2s ease,color .2s ease,transform .2s ease;
+}
+
+nav a:hover{
+  background:var(--claro);
+  transform:translateY(-1px);
+}
+
+nav a.active{
+  background:var(--azul);
+  color:white;
+  box-shadow:0 4px 12px rgba(8,126,164,.25);
+}
+
+main{
+  max-width:1200px;
+  margin:auto;
+  padding:40px 5%;
+}
+
+section{
+  margin:30px 0 75px;
+  scroll-margin-top:calc(var(--nav-height) + 20px);
+  opacity:0;
+  transform:translateY(22px);
+  transition:opacity .65s ease,transform .65s ease;
+}
+
+section.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.section-kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  color:var(--verde3);
+  background:var(--verde2);
+  border:1px solid #b9e6ca;
+  border-radius:999px;
+  padding:5px 11px;
+  font-size:.82rem;
+  font-weight:bold;
+  margin-bottom:7px;
+}
+
+h2{
+  font-size:2.2rem;
+  margin-bottom:12px;
+  color:var(--azul2);
+}
+
+h3{color:var(--azul2)}
+
+.lead{
+  font-size:1.08rem;
+  color:var(--cinza);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:white;
+  border-radius:var(--raio);
+  padding:24px;
+  box-shadow:var(--sombra);
+  border:1px solid #e1edf1;
+  transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+}
+
+.card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 16px 35px rgba(16,42,67,.13);
+  border-color:#b9dfe8;
+}
+
+.card strong{color:var(--azul2)}
+
+.callout{
+  background:var(--verde2);
+  border-left:6px solid var(--verde);
+  padding:18px 20px;
+  border-radius:12px;
+  margin-top:20px;
+}
+
+.warn{
+  background:#fff8df;
+  border-left:6px solid var(--amarelo);
+  padding:18px 20px;
+  border-radius:12px;
+  margin-top:18px;
+}
+
+.process{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:10px;
+  align-items:stretch;
+}
+
+.step{
+  background:white;
+  border:2px solid #c9eaf2;
+  border-radius:16px;
+  padding:18px;
+  text-align:center;
+  transition:transform .2s ease,border-color .2s ease;
+}
+
+.step:hover{
+  transform:translateY(-3px);
+  border-color:#7bc9a2;
+}
+
+.step .num{
+  display:inline-grid;
+  place-items:center;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:var(--azul);
+  color:white;
+  font-weight:bold;
+  box-shadow:0 0 0 4px #e3f5f9;
+}
+
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:18px;
+}
+
+figure{
+  margin:0;
+  background:white;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:var(--sombra);
+}
+
+figure img{
+  display:block;
+  width:100%;
+  height:290px;
+  object-fit:cover;
+}
+
+figcaption{
+  padding:14px 16px;
+  color:var(--cinza);
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  background:white;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:var(--sombra);
+}
+
+th,td{
+  padding:12px;
+  border-bottom:1px solid #e6eef2;
+  text-align:left;
+}
+
+th{
+  background:#e7f6fa;
+  color:var(--azul2);
+}
+
+.controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:15px 0;
+}
+
+input,select{
+  padding:11px 13px;
+  border:1px solid #b8ccd5;
+  border-radius:10px;
+  font-size:1rem;
+}
+
+input:focus{
+  outline:3px solid rgba(8,126,164,.15);
+  border-color:var(--azul);
+}
+
+.result{
+  font-size:1.3rem;
+  font-weight:bold;
+  color:var(--verde);
+  min-height:32px;
+}
+
+canvas{
+  width:100%;
+  max-height:390px;
+  background:white;
+  border-radius:16px;
+  box-shadow:var(--sombra);
+}
+
+.chart-note{
+  font-size:.9rem;
+  color:var(--cinza);
+}
+
+.tabs{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:12px;
+}
+
+.tabbtn{
+  border:2px solid #b8dbe5;
+  background:white;
+  color:var(--azul2);
+  padding:10px 15px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:bold;
+  transition:all .22s ease;
+}
+
+.tabbtn:hover{
+  border-color:var(--verde);
+  transform:translateY(-1px);
+}
+
+.tabbtn.active{
+  background:var(--azul);
+  color:white;
+  border-color:var(--azul);
+  box-shadow:0 5px 14px rgba(8,126,164,.22);
+}
+
+.tabcontent{
+  display:none;
+  animation:tabIn .3s ease;
+}
+
+.tabcontent.active{display:block}
+
+@keyframes tabIn{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+details{
+  background:white;
+  border:1px solid #dbe9ee;
+  border-radius:12px;
+  margin:10px 0;
+  padding:14px 18px;
+}
+
+summary{
+  cursor:pointer;
+  font-weight:bold;
+  color:var(--azul2);
+}
+
+.quiz{
+  background:linear-gradient(180deg,#effbfe,#fff);
+  border:1px solid #cdebf3;
+  padding:24px;
+  border-radius:20px;
+}
+
+.question{
+  background:white;
+  border-radius:14px;
+  padding:16px;
+  margin:14px 0;
+  box-shadow:0 3px 12px rgba(16,42,67,.06);
+}
+
+.question label{
+  display:block;
+  margin:7px 0;
+  padding:7px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.question label:hover{background:#eef9fc}
+
+.feedback{
+  font-weight:bold;
+  margin-top:8px;
+}
+
+.kpi{
+  font-size:2.2rem;
+  font-weight:bold;
+  color:var(--azul2);
+}
+
+.computational{
+  background:linear-gradient(135deg,#063b4d,#087ea4);
+  color:white;
+  border-radius:var(--raio);
+  padding:25px;
+  margin:25px 0;
+  box-shadow:var(--sombra);
+  border-bottom:5px solid var(--verde);
+}
+
+.computational h3{color:white;margin-top:0}
+
+.computational .tag{
+  display:inline-block;
+  background:rgba(25,135,84,.8);
+  border-radius:999px;
+  padding:5px 10px;
+  font-size:.8rem;
+  font-weight:bold;
+  margin:3px;
+}
+
+.references{
+  background:#082f3d;
+  color:#dceff3;
+  padding:55px 6%;
+  margin-top:50px;
+  border-top:6px solid var(--verde);
+}
+
+.references-inner{
+  max-width:1200px;
+  margin:auto;
+}
+
+.references h2{color:white}
+
+.references p{color:#b9d7de}
+
+.references ol{
+  padding-left:22px;
+}
+
+.references li{
+  margin:12px 0;
+}
+
+.references a{
+  color:#72d7f0;
+}
+
+footer{
+  background:#051f2a;
+  color:#b9d7de;
+  padding:28px 6%;
+  text-align:center;
+}
+
+.small{
+  font-size:.9rem;
+  color:#667;
+}
+
+.references .small{
+  color:#9fc2cb;
+}
+
+@media(max-width:700px){
+  header{
+    min-height:84vh;
+    padding:50px 6%;
+  }
+  h1{
+    font-size:clamp(2.5rem,15vw,4.5rem);
+  }
+  h2{font-size:1.8rem}
+  figure img{height:220px}
+  .btn{width:100%;margin-right:0}
+  .discipline-bar{gap:6px}
+  .discipline{font-size:.78rem}
+}
+
+/* Redução de movimento para quem prefere menos animação */
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+  }
+  section{opacity:1;transform:none}
+}
+</style>
+</head>
+
+<body>
+
+<header id="inicio">
+  <div class="hero">
+    <span class="badge">Projeto interdisciplinar • Trabalho escolar</span>
+
+    <div class="discipline-bar" aria-label="Disciplinas do projeto">
+      <span class="discipline">⚗️ Química</span>
+      <span class="discipline">🧬 Biologia</span>
+      <span class="discipline">📊 Matemática</span>
+      <span class="discipline">💻 Pensamento Computacional</span>
+    </div>
+
+    <h1>Água em<br>Equilíbrio 💧</h1>
+
+    <p class="project-description">
+      <strong>Trabalho interdisciplinar de Química, Biologia, Matemática e Pensamento Computacional</strong>,
+      desenvolvido para relacionar ciência, tecnologia e sustentabilidade ao estudo da água,
+      do tratamento de água e esgoto e do uso consciente dos recursos hídricos.
+    </p>
+
+    <p>
+      Uso sustentável da água: como o tratamento, a ciência, o reúso, os dados e a tecnologia
+      ajudam a proteger um recurso essencial à vida.
+    </p>
+
+    <p>
+      <strong>Relato de visita:</strong> neste projeto, registramos uma visita à Sanepar,
+      em Maringá – PR, aproximando o conteúdo estudado da realidade do saneamento.
+    </p>
+
+    <a class="btn" href="#biologia">Explorar o projeto ↓</a>
+    <a class="btn alt" href="#quiz">Fazer o quiz 🧠</a>
+  </div>
+</header>
+
+<nav aria-label="Navegação principal">
+  <a href="#inicio" class="active">Início</a>
+  <a href="#sustentabilidade">Sustentabilidade</a>
+  <a href="#biologia">Biologia</a>
+  <a href="#quimica">Química</a>
+  <a href="#matematica">Matemática</a>
+  <a href="#visita">Nossa visita</a>
+  <a href="#quiz">Quiz</a>
+  <a href="#referencias">Referências</a>
+</nav>
+
+<main>
+
+<section id="sustentabilidade">
+  <span class="section-kicker">🌎 Química • Biologia • Matemática</span>
+  <h2>Por que usar a água de forma sustentável?</h2>
+  <p class="lead">
+    Sustentabilidade hídrica significa usar a água de maneira responsável, preservando sua
+    quantidade e qualidade para as pessoas, os demais seres vivos e as futuras gerações.
+  </p>
+
+  <div class="grid">
+    <article class="card">
+      <div class="kpi">≈ 90 tri L</div>
+      <p>Retirada total de água estimada no Brasil em 2022, segundo a ANA.</p>
+    </article>
+    <article class="card">
+      <div class="kpi">≈ 85%</div>
+      <p>Participação conjunta aproximada da irrigação, abastecimento urbano e indústria de transformação nesse volume.</p>
+    </article>
+    <article class="card">
+      <div class="kpi">+30%</div>
+      <p>Projeção da ANA de crescimento da demanda setorial até 2040 em relação a 2022.</p>
+    </article>
+  </div>
+
+  <div class="callout">
+    <strong>O ponto central:</strong> economizar água não é apenas diminuir o tempo do banho.
+    Também envolve proteger mananciais, tratar esgoto, evitar poluição, corrigir vazamentos,
+    melhorar processos industriais e ampliar soluções de reúso.
+  </div>
+
+  <div class="computational">
+    <span class="tag">💻 Pensamento Computacional</span>
+    <span class="tag">📊 Dados</span>
+    <h3>Como a tecnologia entra no projeto?</h3>
+    <p>
+      O pensamento computacional aparece na organização das informações, na criação de
+      algoritmos para a calculadora, na construção de gráficos, na lógica do quiz e na
+      programação das interações desta página.
+    </p>
+  </div>
+</section>
+
+<section id="biologia">
+  <span class="section-kicker">🧬 Biologia • Pensamento Computacional</span>
+  <h2>Biologia: ETA e ETE</h2>
+  <p class="lead">
+    O saneamento está diretamente relacionado à saúde, aos ecossistemas e aos ciclos da matéria.
+    As estações de tratamento usam processos físicos, químicos e biológicos para melhorar a
+    qualidade da água e do esgoto.
+  </p>
+
+  <div class="tabs" role="tablist" aria-label="Conteúdo de Biologia">
+    <button class="tabbtn active" type="button" onclick="openTab(event,'eta')">ETA — água</button>
+    <button class="tabbtn" type="button" onclick="openTab(event,'ete')">ETE — esgoto</button>
+    <button class="tabbtn" type="button" onclick="openTab(event,'micro')">Biologia e microrganismos</button>
+  </div>
+
+  <div id="eta" class="tabcontent active">
+    <div class="card">
+      <h3>🚰 Estação de Tratamento de Água (ETA)</h3>
+      <p>
+        Na ETA, a água captada de um manancial passa por etapas que removem partículas,
+        matéria em suspensão, microrganismos e outras impurezas. A Sanepar descreve etapas
+        como coagulação, floculação, decantação, filtração e desinfecção.
+      </p>
+
+      <div class="process">
+        <div class="step"><span class="num">1</span><h4>Coagulação</h4><p>Produtos coagulantes ajudam partículas pequenas a se agruparem.</p></div>
+        <div class="step"><span class="num">2</span><h4>Floculação</h4><p>As partículas formam flocos maiores.</p></div>
+        <div class="step"><span class="num">3</span><h4>Decantação</h4><p>Flocos mais densos sedimentam.</p></div>
+        <div class="step"><span class="num">4</span><h4>Filtração</h4><p>A água atravessa meios filtrantes.</p></div>
+        <div class="step"><span class="num">5</span><h4>Desinfecção</h4><p>Reduz microrganismos que podem causar doenças.</p></div>
+      </div>
+
+      <div class="warn">
+        <strong>Qualidade:</strong> a legislação brasileira estabelece padrões microbiológicos,
+        químicos, de turbidez e outros parâmetros para a água destinada ao consumo humano.
+      </div>
+    </div>
+  </div>
+
+  <div id="ete" class="tabcontent">
+    <div class="card">
+      <h3>♻️ Estação de Tratamento de Esgoto (ETE)</h3>
+      <p>
+        Na ETE, o esgoto coletado é tratado antes de ser devolvido ao ambiente.
+        O tratamento pode envolver processos preliminares, processos biológicos,
+        reatores anaeróbios, lodos ativados e outras tecnologias, conforme as características do sistema.
+      </p>
+
+      <div class="process">
+        <div class="step"><span class="num">1</span><h4>Gradeamento</h4><p>Retém sólidos grosseiros.</p></div>
+        <div class="step"><span class="num">2</span><h4>Desarenação</h4><p>Remove areia e materiais minerais.</p></div>
+        <div class="step"><span class="num">3</span><h4>Tratamento biológico</h4><p>Microrganismos ajudam a degradar matéria orgânica.</p></div>
+        <div class="step"><span class="num">4</span><h4>Separação</h4><p>Parte dos sólidos é separada do líquido tratado.</p></div>
+        <div class="step"><span class="num">5</span><h4>Destino adequado</h4><p>O efluente tratado segue para a destinação prevista conforme as normas.</p></div>
+      </div>
+
+      <p>
+        <strong>Por que isso é Biologia?</strong> Porque organismos microscópicos participam
+        de processos de decomposição da matéria orgânica. Além disso, a qualidade da água
+        influencia diretamente os ecossistemas e a saúde pública.
+      </p>
+    </div>
+  </div>
+
+  <div id="micro" class="tabcontent">
+    <div class="grid">
+      <div class="card"><h3>🦠 Microrganismos</h3><p>Bactérias e outros microrganismos podem atuar na transformação e degradação de matéria orgânica durante determinadas etapas do tratamento de esgoto.</p></div>
+      <div class="card"><h3>🌿 Ecossistemas</h3><p>O lançamento inadequado de esgoto pode alterar a qualidade da água, afetando organismos aquáticos, cadeias alimentares e o equilíbrio dos ecossistemas.</p></div>
+      <div class="card"><h3>🧑‍⚕️ Saúde</h3><p>O controle da qualidade da água para consumo humano é uma medida importante de prevenção de doenças relacionadas à água contaminada.</p></div>
+    </div>
+  </div>
+
+  <div class="computational">
+    <span class="tag">💻 Pensamento Computacional</span>
+    <h3>Algoritmos e processos</h3>
+    <p>
+      Assim como uma ETA ou uma ETE possui uma sequência organizada de etapas,
+      um algoritmo também trabalha com passos definidos para chegar a um resultado.
+      Essa comparação ajuda a relacionar o saneamento à lógica de programação.
+    </p>
+  </div>
+</section>
+
+<section id="quimica">
+  <span class="section-kicker">⚗️ Química • Sustentabilidade</span>
+  <h2>Química: reúso da água</h2>
+  <p class="lead">
+    Reúso é o aproveitamento de água que passou por tratamento adequado para uma finalidade
+    compatível com sua qualidade. O tratamento necessário depende do uso pretendido.
+  </p>
+
+  <div class="grid">
+    <article class="card">
+      <h3>O que pode ser reutilizado?</h3>
+      <p>
+        Dependendo do tratamento e das normas aplicáveis, água de reúso pode ser destinada
+        a usos como limpeza de áreas, determinados processos industriais, irrigação de usos
+        específicos e outras aplicações não potáveis.
+      </p>
+    </article>
+
+    <article class="card">
+      <h3>Qual é o papel da Química?</h3>
+      <p>
+        A Química ajuda a compreender pH, turbidez, sais, matéria orgânica, desinfetantes,
+        nutrientes e contaminantes. Esses parâmetros orientam o controle da qualidade da água.
+      </p>
+    </article>
+
+    <article class="card">
+      <h3>Reúso ≠ água potável</h3>
+      <p>
+        Água de reúso não deve ser automaticamente considerada própria para beber.
+        A finalidade e o nível de tratamento precisam ser definidos de acordo com critérios técnicos e sanitários.
+      </p>
+    </article>
+  </div>
+
+  <details>
+    <summary>Exemplo químico: por que o pH importa?</summary>
+    <p>
+      O pH indica, em uma escala, a acidez ou basicidade de uma solução.
+      Ele pode influenciar reações químicas, eficiência de processos de tratamento
+      e características da água. Por isso, é um dos parâmetros monitorados em sistemas de tratamento.
+    </p>
+  </details>
+
+  <details>
+    <summary>Exemplo químico: desinfecção</summary>
+    <p>
+      Na desinfecção, agentes como compostos à base de cloro podem ser utilizados para
+      reduzir microrganismos. A concentração e o tempo de contato precisam seguir critérios técnicos e sanitários.
+    </p>
+  </details>
+
+  <div class="callout">
+    <strong>Química + tecnologia:</strong> compreender as propriedades da água permite
+    escolher e controlar processos de tratamento adequados para cada finalidade.
+  </div>
+</section>
+
+<section id="matematica">
+  <span class="section-kicker">📊 Matemática • 💻 Pensamento Computacional</span>
+  <h2>Matemática: transformar água em dados</h2>
+  <p class="lead">
+    A Matemática ajuda a medir consumo, comparar períodos, calcular economia e visualizar tendências.
+    Os gráficos abaixo usam <strong>dados didáticos ilustrativos</strong>, criados para demonstrar
+    como uma análise matemática pode ser feita — eles não representam medições da Sanepar.
+  </p>
+
+  <div class="grid">
+    <article class="card">
+      <h3>1. Consumo mensal hipotético</h3>
+      <canvas id="chart1" width="700" height="380" aria-label="Gráfico de consumo mensal hipotético"></canvas>
+      <p class="chart-note">Exemplo: consumo residencial em m³ ao longo de seis meses.</p>
+    </article>
+
+    <article class="card">
+      <h3>2. Economia após medidas sustentáveis</h3>
+      <canvas id="chart2" width="700" height="380" aria-label="Gráfico de economia de água"></canvas>
+      <p class="chart-note">Exemplo didático: comparação antes/depois de ações de economia.</p>
+    </article>
+  </div>
+
+  <div class="card">
+    <h3>🧮 Calculadora de economia de água</h3>
+    <p>
+      Digite um consumo mensal e uma redução estimada. A calculadora mostra o consumo
+      após a economia e quanto seria poupado em um ano.
+    </p>
+
+    <div class="controls">
+      <input id="consumo" type="number" min="0" step="0.1" value="12" placeholder="m³/mês" aria-label="Consumo mensal em metros cúbicos">
+      <input id="reducao" type="number" min="0" max="100" step="1" value="20" placeholder="%" aria-label="Percentual de redução">
+      <button class="btn" type="button" style="background:var(--azul);color:white" onclick="calcular()">Calcular</button>
+    </div>
+
+    <div id="resultado" class="result" aria-live="polite"></div>
+  </div>
+
+  <div class="card">
+    <h3>📐 Conceitos matemáticos presentes no projeto</h3>
+    <ul>
+      <li><strong>Porcentagem:</strong> calcular a redução percentual do consumo.</li>
+      <li><strong>Média:</strong> encontrar o consumo médio de vários meses.</li>
+      <li><strong>Razão e proporção:</strong> comparar volumes de água.</li>
+      <li><strong>Unidades:</strong> relacionar litros (L) e metros cúbicos (m³), sabendo que 1 m³ = 1.000 L.</li>
+      <li><strong>Gráficos:</strong> identificar crescimento, queda, estabilidade e diferenças entre categorias.</li>
+    </ul>
+  </div>
+
+  <div class="computational">
+    <span class="tag">💻 Algoritmo</span>
+    <span class="tag">📊 Visualização de dados</span>
+    <h3>Pensamento Computacional na prática</h3>
+    <p>
+      A calculadora utiliza uma sequência lógica: receber os dados → validar os valores →
+      calcular a redução → calcular a economia anual → apresentar o resultado.
+      Isso é uma aplicação direta de decomposição, lógica e criação de algoritmos.
+    </p>
+  </div>
+</section>
+
+<section id="visita">
+  <span class="section-kicker">🏭 Ciências • Observação • Tecnologia</span>
+  <h2>Nossa visita à Sanepar — Maringá, PR</h2>
+  <p class="lead">
+    Para aproximar a teoria da prática, registramos uma visita à Sanepar em Maringá–PR.
+    As fotografias abaixo fazem parte do nosso registro e mostram estruturas e materiais observados durante a visita.
+  </p>
+
+  <div class="gallery">
+    <figure>
+      <img src="visita-sanepar-01.jpg" alt="Área de estruturas de tratamento observada durante a visita à Sanepar em Maringá">
+      <figcaption><strong>Foto 1 — Área da estação:</strong> estruturas, passarelas e equipamentos observados durante a visita.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="visita-sanepar-02.jpg" alt="Modelo expositivo com filtro, microscópio e equipamentos observado durante a visita">
+      <figcaption><strong>Foto 2 — Material de demonstração:</strong> modelo identificado como “FILTRO”, microscópio e outros equipamentos.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="visita-sanepar-03.jpg" alt="Detalhe do microscópio e equipamento de laboratório observado durante a visita">
+      <figcaption><strong>Foto 3 — Observação científica:</strong> microscópio e equipamento de laboratório apresentados no espaço visitado.</figcaption>
+    </figure>
+  </div>
+
+  <div class="callout">
+    <strong>O que relacionamos com as disciplinas?</strong><br>
+    🧬 Biologia → microrganismos, saúde e tratamento de água/esgoto.<br>
+    ⚗️ Química → propriedades da água, desinfecção, parâmetros de qualidade e reúso.<br>
+    📊 Matemática → volumes, porcentagens, tabelas, gráficos e interpretação de dados.<br>
+    💻 Pensamento Computacional → organização de informações, algoritmos, lógica, interatividade e programação do site.
+  </div>
+</section>
+
+<section id="quiz">
+  <span class="section-kicker">🧠 Pensamento Computacional • Revisão</span>
+  <h2>Quiz interativo</h2>
+
+  <div class="quiz">
+    <p><strong>Teste seus conhecimentos!</strong> Escolha uma alternativa em cada questão e clique em “Corrigir”.</p>
+
+    <div class="question" data-answer="b">
+      <strong>1. Qual é uma etapa típica de uma ETA?</strong>
+      <label><input type="radio" name="q1" value="a"> A) Fermentação alcoólica</label>
+      <label><input type="radio" name="q1" value="b"> B) Filtração</label>
+      <label><input type="radio" name="q1" value="c"> C) Fotossíntese</label>
+    </div>
+
+    <div class="question" data-answer="c">
+      <strong>2. Qual é a principal finalidade de uma ETE?</strong>
+      <label><input type="radio" name="q2" value="a"> A) Produzir combustível</label>
+      <label><input type="radio" name="q2" value="b"> B) Aumentar a salinidade da água</label>
+      <label><input type="radio" name="q2" value="c"> C) Tratar o esgoto antes da destinação adequada</label>
+    </div>
+
+    <div class="question" data-answer="a">
+      <strong>3. O que representa 1 m³?</strong>
+      <label><input type="radio" name="q3" value="a"> A) 1.000 litros</label>
+      <label><input type="radio" name="q3" value="b"> B) 100 litros</label>
+      <label><input type="radio" name="q3" value="c"> C) 10 litros</label>
+    </div>
+
+    <div class="question" data-answer="b">
+      <strong>4. O reúso da água significa:</strong>
+      <label><input type="radio" name="q4" value="a"> A) Usar qualquer água contaminada sem tratamento</label>
+      <label><input type="radio" name="q4" value="b"> B) Aproveitar água tratada para uma finalidade compatível com sua qualidade</label>
+      <label><input type="radio" name="q4" value="c"> C) Transformar toda água de reúso em água potável</label>
+    </div>
+
+    <div class="question" data-answer="c">
+      <strong>5. Qual área ajuda a interpretar gráficos de consumo?</strong>
+      <label><input type="radio" name="q5" value="a"> A) Apenas Literatura</label>
+      <label><input type="radio" name="q5" value="b"> B) Apenas História</label>
+      <label><input type="radio" name="q5" value="c"> C) Matemática</label>
+    </div>
+
+    <div class="question" data-answer="a">
+      <strong>6. Qual destes é um parâmetro relacionado à qualidade da água?</strong>
+      <label><input type="radio" name="q6" value="a"> A) Turbidez</label>
+      <label><input type="radio" name="q6" value="b"> B) Latitude</label>
+      <label><input type="radio" name="q6" value="c"> C) Velocidade do vento</label>
+    </div>
+
+    <div class="question" data-answer="b">
+      <strong>7. No tratamento biológico de esgoto, qual grupo pode ter papel importante na degradação da matéria orgânica?</strong>
+      <label><input type="radio" name="q7" value="a"> A) Rochas</label>
+      <label><input type="radio" name="q7" value="b"> B) Microrganismos</label>
+      <label><input type="radio" name="q7" value="c"> C) Plásticos</label>
+    </div>
+
+    <div class="question" data-answer="c">
+      <strong>8. Uma redução de 20% em 10 m³ corresponde a uma economia de:</strong>
+      <label><input type="radio" name="q8" value="a"> A) 0,2 m³</label>
+      <label><input type="radio" name="q8" value="b"> B) 1 m³</label>
+      <label><input type="radio" name="q8" value="c"> C) 2 m³</label>
+    </div>
+
+    <button class="btn" type="button" style="background:var(--azul);color:white" onclick="corrigirQuiz()">Corrigir quiz</button>
+    <div id="quizResult" class="result" aria-live="polite"></div>
+  </div>
+</section>
+
+</main>
+
+<section id="referencias" class="references">
+  <div class="references-inner">
+    <span class="section-kicker">📚 Fontes bibliográficas</span>
+    <h2>Referências utilizadas no projeto</h2>
+    <p>
+      As fontes abaixo foram escolhidas para fundamentar as informações sobre recursos hídricos,
+      tratamento de água, tratamento de esgoto e qualidade da água para consumo humano.
+    </p>
+
+    <ol>
+      <li>
+        AGÊNCIA NACIONAL DE ÁGUAS E SANEAMENTO BÁSICO (ANA).
+        <strong>Usos da água.</strong> Dados de referência sobre retirada de água no Brasil,
+        setores usuários e projeções de demanda.
+        Disponível em:
+        <a href="https://www.gov.br/ana/pt-br/assuntos/gestao-das-aguas/usos-da-agua" target="_blank" rel="noopener noreferrer">gov.br/ana — Usos da água</a>.
+        Acesso em 27 ago. 2026.
+      </li>
+
+      <li>
+        AGÊNCIA NACIONAL DE ÁGUAS E SANEAMENTO BÁSICO (ANA).
+        <strong>Conjuntura dos Recursos Hídricos.</strong>
+        Publicação de referência para dados, estatísticas e indicadores relacionados à água no Brasil.
+        Disponível em:
+        <a href="https://www.gov.br/ana/pt-br/centrais-de-conteudos/publicacoes/conjuntura-dos-recursos-hidricos/conjuntura-dos-recursos-hidricos" target="_blank" rel="noopener noreferrer">gov.br/ana — Conjuntura dos Recursos Hídricos</a>.
+        Acesso em 27 ago. 2026.
+      </li>
+
+      <li>
+        SANEPAR — Companhia de Saneamento do Paraná.
+        <strong>Tratamento de Água.</strong>
+        Informações sobre as etapas de tratamento de água, incluindo coagulação, floculação,
+        decantação, filtração e desinfecção.
+        Disponível em:
+        <a href="https://www.sanepar.com.br/tratamento-agua" target="_blank" rel="noopener noreferrer">sanepar.com.br — Tratamento de Água</a>.
+        Acesso em 27 ago. 2026.
+      </li>
+
+      <li>
+        SANEPAR — Companhia de Saneamento do Paraná.
+        <strong>Esgoto tratado no Paraná devolve água de qualidade aos rios.</strong>
+        Informações sobre processos físicos, químicos e biológicos no tratamento de esgoto.
+        Disponível em:
+        <a href="https://www.sanepar.com.br/noticias/esgoto-tratado-no-parana-devolve-agua-de-qualidade-aos-rios" target="_blank" rel="noopener noreferrer">sanepar.com.br — Tratamento de esgoto</a>.
+        Acesso em 27 ago. 2026.
+      </li>
+
+      <li>
+        BRASIL. MINISTÉRIO DA SAÚDE.
+        <strong>Portaria GM/MS nº 888, de 4 de maio de 2021.</strong>
+        Dispõe sobre os procedimentos de controle e vigilância da qualidade da água para consumo humano
+        e seu padrão de potabilidade.
+        Disponível em:
+        <a href="https://bvsms.saude.gov.br/bvs/saudelegis/gm/2021/prt0888_24_05_2021_rep.html" target="_blank" rel="noopener noreferrer">Biblioteca Virtual em Saúde — Ministério da Saúde</a>.
+        Acesso em 27 ago. 2026.
+      </li>
+    </ol>
+
+    <p class="small">
+      Observação: os gráficos da seção de Matemática são exemplos didáticos e não representam
+      medições oficiais da Sanepar.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <strong>Água em Equilíbrio 💧</strong>
+  <p>
+    Trabalho interdisciplinar de <strong>Química, Biologia, Matemática e Pensamento Computacional</strong>.
+  </p>
+  <p class="small" style="color:#9fc2cb">
+    Projeto educativo • Uso sustentável da água • Tratamento • Reúso • Ciência e tecnologia
+  </p>
+</footer>
+
+<script>
+/* Navegação suave com ajuste para o menu fixo */
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', function(event){
+    const id = this.getAttribute('href');
+    const target = document.querySelector(id);
+
+    if(!target) return;
+
+    event.preventDefault();
+
+    const nav = document.querySelector('nav');
+    const offset = (nav ? nav.offsetHeight : 0) + 12;
+    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+
+    window.scrollTo({
+      top,
+      behavior:'smooth'
+    });
+  });
+});
+
+/* Abas ETA / ETE / Microrganismos */
+function openTab(event, tabId){
+  document.querySelectorAll('.tabcontent').forEach(tab => {
+    tab.classList.remove('active');
+  });
+
+  document.querySelectorAll('.tabbtn').forEach(button => {
+    button.classList.remove('active');
+  });
+
+  const selectedTab = document.getElementById(tabId);
+
+  if(selectedTab){
+    selectedTab.classList.add('active');
+  }
+
+  if(event && event.currentTarget){
+    event.currentTarget.classList.add('active');
+  }
+}
+
+/* Calculadora */
+function calcular(){
+  const consumo = Number.parseFloat(document.getElementById('consumo').value);
+  const reducao = Number.parseFloat(document.getElementById('reducao').value);
+  const resultado = document.getElementById('resultado');
+
+  if(!Number.isFinite(consumo) || !Number.isFinite(reducao)){
+    resultado.textContent = 'Digite valores válidos.';
+    return;
+  }
+
+  if(consumo < 0 || reducao < 0 || reducao > 100){
+    resultado.textContent = 'Use consumo ≥ 0 e redução entre 0% e 100%.';
+    return;
+  }
+
+  const economiaMensal = consumo * (reducao / 100);
+  const consumoFinal = consumo - economiaMensal;
+  const economiaAnual = economiaMensal * 12;
+
+  resultado.innerHTML =
+    `Consumo após a redução: <strong>${consumoFinal.toFixed(2)} m³/mês</strong> • ` +
+    `Economia anual: <strong>${economiaAnual.toFixed(2)} m³</strong> ` +
+    `(${(economiaAnual * 1000).toFixed(0)} litros).`;
+}
+
+/* Gráficos simples em Canvas, sem bibliotecas externas */
+function drawBarChart(canvasId, labels, values, title){
+  const canvas = document.getElementById(canvasId);
+  if(!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  const width = canvas.width;
+  const height = canvas.height;
+
+  ctx.clearRect(0,0,width,height);
+
+  const padding = 55;
+  const chartW = width - padding * 1.4;
+  const chartH = height - padding * 1.55;
+  const max = Math.max(...values) * 1.2;
+  const barSpace = chartW / values.length;
+  const barW = barSpace * .58;
+
+  ctx.fillStyle = '#102a43';
+  ctx.font = 'bold 18px Arial';
+  ctx.fillText(title, padding, 28);
+
+  ctx.strokeStyle = '#d9e8ed';
+  ctx.lineWidth = 1;
+
+  for(let i=0;i<=5;i++){
+    const y = padding + chartH - (chartH * i / 5);
+    ctx.beginPath();
+    ctx.moveTo(padding, y);
+    ctx.lineTo(width - padding/2, y);
+    ctx.stroke();
+
+    ctx.fillStyle = '#52606d';
+    ctx.font = '12px Arial';
+    const value = (max * i / 5).toFixed(1);
+    ctx.fillText(value, 10, y + 4);
+  }
+
+  values.forEach((value,index) => {
+    const x = padding + index * barSpace + (barSpace-barW)/2;
+    const barH = (value/max) * chartH;
+    const y = padding + chartH - barH;
+
+    ctx.fillStyle = index % 2 === 0 ? '#087ea4' : '#198754';
+    ctx.fillRect(x,y,barW,barH);
+
+    ctx.fillStyle = '#102a43';
+    ctx.font = 'bold 12px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText(value.toFixed(1), x + barW/2, y - 7);
+
+    ctx.font = '12px Arial';
+    ctx.fillText(labels[index], x + barW/2, height - 22);
+  });
+
+  ctx.textAlign = 'left';
+}
+
+function drawCharts(){
+  drawBarChart(
+    'chart1',
+    ['Jan','Fev','Mar','Abr','Mai','Jun'],
+    [12,13.5,11.8,14,12.6,11.2],
+    'Consumo mensal (m³)'
+  );
+
+  drawBarChart(
+    'chart2',
+    ['Antes','Depois'],
+    [14,10.8],
+    'Consumo antes x depois (m³)'
+  );
+}
+
+/* Quiz */
+function corrigirQuiz(){
+  const questions = document.querySelectorAll('.question');
+  let score = 0;
+  let answered = 0;
+
+  questions.forEach(question => {
+    const answer = question.dataset.answer;
+    const selected = question.querySelector('input:checked');
+    const oldFeedback = question.querySelector('.feedback');
+
+    if(oldFeedback) oldFeedback.remove();
+
+    const feedback = document.createElement('div');
+    feedback.className = 'feedback';
+
+    if(selected){
+      answered++;
+
+      if(selected.value === answer){
+        score++;
+        feedback.textContent = '✓ Correto!';
+        feedback.style.color = '#198754';
+      }else{
+        feedback.textContent = '✗ Incorreto.';
+        feedback.style.color = '#b42318';
+      }
+    }else{
+      feedback.textContent = '⚠ Escolha uma alternativa.';
+      feedback.style.color = '#a15c00';
+    }
+
+    question.appendChild(feedback);
+  });
+
+  const result = document.getElementById('quizResult');
+  result.textContent = `Resultado: ${score}/${questions.length} acertos (${answered}/${questions.length} questões respondidas).`;
+}
+
+/* Animação de entrada das seções */
+const sections = document.querySelectorAll('main section');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+    }
+  });
+},{threshold:.10});
+
+sections.forEach(section => observer.observe(section));
+
+/* Destaque da opção atual no menu */
+const navLinks = [...document.querySelectorAll('nav a')];
+const observedSections = [...document.querySelectorAll('main section, header')];
+
+const sectionObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(!entry.isIntersecting) return;
+
+    const id = entry.target.id;
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+    });
+  });
+},{
+  rootMargin:`-${getComputedStyle(document.documentElement).getPropertyValue('--nav-height')}px 0px -55% 0px`,
+  threshold:0
+});
+
+observedSections.forEach(section => sectionObserver.observe(section));
+
+/* Inicialização */
+window.addEventListener('load', () => {
+  calcular();
+  drawCharts();
+  document.querySelector('header')?.classList.add('visible');
+});
+</script>
+
+</body>
+</html>
