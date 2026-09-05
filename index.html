@@ -231,6 +231,12 @@ section{
   transition:opacity .65s ease,transform .65s ease;
 }
 
+/* A área de referências fica fora de <main>, portanto não depende do observer. */
+#referencias{
+  opacity:1;
+  transform:none;
+}
+
 section.visible{
   opacity:1;
   transform:translateY(0);
@@ -604,6 +610,42 @@ footer{
   }
   section{opacity:1;transform:none}
 }
+
+.img-fallback{
+  height:290px;
+  display:grid;
+  place-items:center;
+  padding:25px;
+  text-align:center;
+  background:linear-gradient(135deg,#eaf8fc,#dff5e7);
+  color:#075985;
+  font-weight:bold;
+}
+@media(max-width:700px){
+  .img-fallback{height:220px}
+}
+
+.chart-svg{
+  width:100%;
+  height:auto;
+  min-height:300px;
+  display:block;
+  background:white;
+  border-radius:16px;
+  box-shadow:var(--sombra);
+}
+.chart-svg .axis{stroke:#52606d;stroke-width:2}
+.chart-svg .gridlines line{stroke:#d9e8ed;stroke-width:1}
+.chart-svg .bars rect{fill:#087ea4;rx:5;transition:opacity .2s ease}
+.chart-svg .bars rect:nth-child(even){fill:#198754}
+.chart-svg .bars rect:hover{opacity:.75}
+.chart-svg .chart-title{fill:#102a43;font:700 18px Arial,sans-serif}
+.chart-svg .chart-labels text{fill:#52606d;font:12px Arial,sans-serif;text-anchor:middle}
+.chart-svg .chart-labels text:nth-child(n+7){fill:#102a43;font-weight:bold}
+.small-bars rect{rx:4}
+@media(max-width:700px){
+  .chart-svg{min-height:240px}
+}
 </style>
 </head>
 
@@ -851,19 +893,78 @@ footer{
   <div class="grid">
     <article class="card">
       <h3>1. Consumo mensal hipotético</h3>
-      <canvas id="chart1" width="700" height="380" aria-label="Gráfico de consumo mensal hipotético"></canvas>
+      <svg class="chart-svg" viewBox="0 0 700 380" role="img" aria-label="Gráfico de consumo mensal hipotético">
+  <text x="350" y="28" text-anchor="middle" class="chart-title">Consumo mensal (m³)</text>
+  <line x1="60" y1="320" x2="675" y2="320" class="axis"/>
+  <line x1="60" y1="70" x2="60" y2="320" class="axis"/>
+  <g class="gridlines">
+    <line x1="60" y1="320" x2="675" y2="320"/><line x1="60" y1="270" x2="675" y2="270"/>
+    <line x1="60" y1="220" x2="675" y2="220"/><line x1="60" y1="170" x2="675" y2="170"/>
+    <line x1="60" y1="120" x2="675" y2="120"/><line x1="60" y1="70" x2="675" y2="70"/>
+  </g>
+  <g class="bars">
+    <rect x="82" y="200" width="62" height="120"/><rect x="182" y="185" width="62" height="135"/>
+    <rect x="282" y="202" width="62" height="118"/><rect x="382" y="180" width="62" height="140"/>
+    <rect x="482" y="194" width="62" height="126"/><rect x="582" y="208" width="62" height="112"/>
+  </g>
+  <g class="chart-labels">
+    <text x="113" y="342">Jan</text><text x="213" y="342">Fev</text><text x="313" y="342">Mar</text>
+    <text x="413" y="342">Abr</text><text x="513" y="342">Mai</text><text x="613" y="342">Jun</text>
+    <text x="113" y="192">12,0</text><text x="213" y="177">13,5</text><text x="313" y="194">11,8</text>
+    <text x="413" y="172">14,0</text><text x="513" y="186">12,6</text><text x="613" y="200">11,2</text>
+  </g>
+</svg>
       <p class="chart-note">Exemplo: consumo residencial em m³ ao longo de seis meses.</p>
     </article>
 
     <article class="card">
       <h3>2. Economia após medidas sustentáveis</h3>
-      <canvas id="chart2" width="700" height="380" aria-label="Gráfico de economia de água"></canvas>
+      <svg class="chart-svg" viewBox="0 0 700 380" role="img" aria-label="Gráfico de economia de água antes e depois">
+  <text x="350" y="28" text-anchor="middle" class="chart-title">Consumo antes x depois (m³)</text>
+  <line x1="60" y1="320" x2="675" y2="320" class="axis"/>
+  <line x1="60" y1="70" x2="60" y2="320" class="axis"/>
+  <g class="gridlines">
+    <line x1="60" y1="320" x2="675" y2="320"/><line x1="60" y1="270" x2="675" y2="270"/>
+    <line x1="60" y1="220" x2="675" y2="220"/><line x1="60" y1="170" x2="675" y2="170"/>
+    <line x1="60" y1="120" x2="675" y2="120"/><line x1="60" y1="70" x2="675" y2="70"/>
+  </g>
+  <g class="bars">
+    <rect x="190" y="95" width="120" height="225"/><rect x="390" y="147" width="120" height="173"/>
+  </g>
+  <g class="chart-labels">
+    <text x="250" y="342">Antes</text><text x="450" y="342">Depois</text>
+    <text x="250" y="87">14,0</text><text x="450" y="139">10,8</text>
+  </g>
+</svg>
       <p class="chart-note">Exemplo didático: comparação antes/depois de ações de economia.</p>
     </article>
 
     <article class="card">
       <h3>3. Retirada de água no Brasil por setor — 2022</h3>
-      <canvas id="chart3" width="700" height="380" aria-label="Gráfico de retirada de água no Brasil por setor em 2022"></canvas>
+      <svg class="chart-svg" viewBox="0 0 700 430" role="img" aria-label="Gráfico de retirada de água no Brasil por setor em 2022">
+  <text x="350" y="28" text-anchor="middle" class="chart-title">Retirada de água por setor (%) — ANA 2022</text>
+  <line x1="65" y1="350" x2="680" y2="350" class="axis"/>
+  <line x1="65" y1="70" x2="65" y2="350" class="axis"/>
+  <g class="gridlines">
+    <line x1="65" y1="350" x2="680" y2="350"/><line x1="65" y1="294" x2="680" y2="294"/>
+    <line x1="65" y1="238" x2="680" y2="238"/><line x1="65" y1="182" x2="680" y2="182"/>
+    <line x1="65" y1="126" x2="680" y2="126"/><line x1="65" y1="70" x2="680" y2="70"/>
+  </g>
+  <g class="bars small-bars">
+    <rect x="78" y="68" width="68" height="282"/><rect x="162" y="216" width="68" height="134"/>
+    <rect x="246" y="297" width="68" height="53"/><rect x="330" y="305" width="68" height="45"/>
+    <rect x="414" y="322" width="68" height="28"/><rect x="498" y="341" width="68" height="9"/>
+    <rect x="582" y="341" width="68" height="9"/>
+  </g>
+  <g class="chart-labels">
+    <text x="112" y="365">Irrig.</text><text x="196" y="365">Urb.</text><text x="280" y="365">Ind.</text>
+    <text x="364" y="365">Animal</text><text x="448" y="365">Term.</text><text x="532" y="365">Rural</text>
+    <text x="616" y="365">Min.</text>
+    <text x="112" y="60">50,5%</text><text x="196" y="208">23,9%</text><text x="280" y="289">9,4%</text>
+    <text x="364" y="297">8%</text><text x="448" y="314">5%</text><text x="532" y="333">1,6%</text>
+    <text x="616" y="333">1,6%</text>
+  </g>
+</svg>
       <p class="chart-note">
         Dados oficiais da ANA: irrigação 50,5%, abastecimento urbano 23,9%,
         indústria 9,4%, uso animal 8%, termelétricas 5%, abastecimento rural 1,6% e mineração 1,6%.
@@ -921,33 +1022,33 @@ footer{
   <div class="gallery">
     <figure>
       <img
-        src="https://www.sanepar.com.br/sites/default/files/styles/news_internal_desktop/public/import/files/foto_2_-_captacao_rio_pirapo_-_estacao_elevatoria.jpg.webp?itok=HvUNdqaJ"
+        src="https://www.sanepar.com.br/sites/default/files/styles/news_internal_desktop/public/import/files/190606_-_estudantes_conhecem_captacao_da_sanepar_no_rio_pirapo_4.jpg.webp?itok=zx5kSdKk"
         alt="Estrutura de captação de água da Sanepar no Rio Pirapó, em Maringá"
         loading="lazy">
       <figcaption>
-        <strong>Captação no Rio Pirapó — Maringá:</strong> imagem oficial da Sanepar mostrando a estrutura de captação.
+        <strong>Visita de estudantes à captação:</strong> registro publicado pela Sanepar durante visita ao Rio Pirapó, em Maringá.
         <br><span class="small">Fonte: Sanepar.</span>
       </figcaption>
     </figure>
 
     <figure>
       <img
-        src="https://www.sanepar.com.br/sites/default/files/styles/news_internal_desktop/public/import/files/foto_3_-_captacao_rio_pirapo_-_visita_vereadores.jpg.webp?itok=FUw4MFfq"
+        src="https://www.sanepar.com.br/sites/default/files/styles/news_internal_desktop/public/import/files/190606_-_estudantes_conhecem_captacao_da_sanepar_no_rio_pirapo_3.jpg.webp?itok=Tewt-p-T"
         alt="Visita à estrutura de captação da Sanepar em Maringá"
         loading="lazy">
       <figcaption>
-        <strong>Visita técnica — Maringá:</strong> registro publicado pela Sanepar em matéria sobre a estrutura de captação.
+        <strong>Explicação técnica:</strong> estudantes e participantes recebem informações durante a visita à captação.
         <br><span class="small">Fonte: Sanepar.</span>
       </figcaption>
     </figure>
 
     <figure>
       <img
-        src="https://www.sanepar.com.br/sites/default/files/styles/edital_featured_card/public/edital/images/edital_003_DIN_0.png.webp?itok=T5nqlPAU"
+        src="https://www.sanepar.com.br/sites/default/files/styles/news_internal_desktop/public/import/files/190606_-_estudantes_conhecem_captacao_da_sanepar_no_rio_pirapo_2.jpg.webp?itok=8in6XBGC"
         alt="Estrutura de estação de tratamento de esgoto da Sanepar"
         loading="lazy">
       <figcaption>
-        <strong>Tratamento de esgoto:</strong> imagem institucional da Sanepar relacionada à ETE.
+        <strong>Registro da visita:</strong> grupo de estudantes durante a visita à unidade de captação do Rio Pirapó.
         <br><span class="small">Fonte: Sanepar.</span>
       </figcaption>
     </figure>
@@ -1206,86 +1307,7 @@ function calcular(){
     `(${(economiaAnual * 1000).toFixed(0)} litros).`;
 }
 
-/* Gráficos simples em Canvas, sem bibliotecas externas */
-function drawBarChart(canvasId, labels, values, title){
-  const canvas = document.getElementById(canvasId);
-  if(!canvas) return;
-
-  const ctx = canvas.getContext('2d');
-  const width = canvas.width;
-  const height = canvas.height;
-
-  ctx.clearRect(0,0,width,height);
-
-  const padding = 55;
-  const chartW = width - padding * 1.4;
-  const chartH = height - padding * 1.55;
-  const max = Math.max(...values) * 1.2;
-  const barSpace = chartW / values.length;
-  const barW = barSpace * .58;
-
-  ctx.fillStyle = '#102a43';
-  ctx.font = 'bold 18px Arial';
-  ctx.fillText(title, padding, 28);
-
-  ctx.strokeStyle = '#d9e8ed';
-  ctx.lineWidth = 1;
-
-  for(let i=0;i<=5;i++){
-    const y = padding + chartH - (chartH * i / 5);
-    ctx.beginPath();
-    ctx.moveTo(padding, y);
-    ctx.lineTo(width - padding/2, y);
-    ctx.stroke();
-
-    ctx.fillStyle = '#52606d';
-    ctx.font = '12px Arial';
-    const value = (max * i / 5).toFixed(1);
-    ctx.fillText(value, 10, y + 4);
-  }
-
-  values.forEach((value,index) => {
-    const x = padding + index * barSpace + (barSpace-barW)/2;
-    const barH = (value/max) * chartH;
-    const y = padding + chartH - barH;
-
-    ctx.fillStyle = index % 2 === 0 ? '#087ea4' : '#198754';
-    ctx.fillRect(x,y,barW,barH);
-
-    ctx.fillStyle = '#102a43';
-    ctx.font = 'bold 12px Arial';
-    ctx.textAlign = 'center';
-    ctx.fillText(value.toFixed(1), x + barW/2, y - 7);
-
-    ctx.font = '12px Arial';
-    ctx.fillText(labels[index], x + barW/2, height - 22);
-  });
-
-  ctx.textAlign = 'left';
-}
-
-function drawCharts(){
-  drawBarChart(
-    'chart1',
-    ['Jan','Fev','Mar','Abr','Mai','Jun'],
-    [12,13.5,11.8,14,12.6,11.2],
-    'Consumo mensal (m³)'
-  );
-
-  drawBarChart(
-    'chart2',
-    ['Antes','Depois'],
-    [14,10.8],
-    'Consumo antes x depois (m³)'
-  );
-
-  drawBarChart(
-    'chart3',
-    ['Irrigação','Urbano','Indústria','Animal','Termelétrica','Rural','Mineração'],
-    [50.5,23.9,9.4,8,5,1.6,1.6],
-    'Retirada de água por setor (%) — ANA 2022'
-  );
-}
+/* Os gráficos são SVG responsivos e não dependem de bibliotecas externas. */
 
 /* Quiz */
 function corrigirQuiz(){
@@ -1360,11 +1382,22 @@ const sectionObserver = new IntersectionObserver(entries => {
 observedSections.forEach(section => sectionObserver.observe(section));
 
 /* Inicialização */
-window.addEventListener('load', () => {
+document.addEventListener('DOMContentLoaded', () => {
   calcular();
-  drawCharts();
+  document.querySelectorAll('main section').forEach(section => section.classList.add('visible'));
   document.querySelector('header')?.classList.add('visible');
 });
+
+/* Evita espaços vazios caso a fonte externa da imagem fique indisponível. */
+document.querySelectorAll('figure img').forEach(img => {
+  img.addEventListener('error', function(){
+    const box = document.createElement('div');
+    box.className = 'img-fallback';
+    box.textContent = 'Imagem da Sanepar indisponível no momento. Consulte a fonte indicada na legenda.';
+    this.replaceWith(box);
+  });
+});
+
 </script>
 
 </body>
